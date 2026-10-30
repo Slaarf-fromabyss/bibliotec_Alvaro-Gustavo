@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categorias | BiblioTec</title>
+    <link rel="stylesheet" th:href="@{/css/categorias.css}">
 </head>
 <body>
+
 <h1>Categorias da biblioteca</h1>
+
+<p class="barra">
+    <a class="botao" th:href="@{/categorias/nova}">Nova categoria</a>
+</p>
 
 <table>
     <caption>Categorias cadastradas no BiblioTec</caption>
@@ -27,5 +33,6 @@
     </tr>
     </tbody>
 </table>
+
 </body>
 </html>

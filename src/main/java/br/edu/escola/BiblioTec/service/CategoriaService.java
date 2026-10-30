@@ -18,4 +18,9 @@ public class CategoriaService {
     public List<Categoria> listarTodas() {
         return categoriaRepository.findAll();
     }
+
+    public Categoria salvar(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
 }

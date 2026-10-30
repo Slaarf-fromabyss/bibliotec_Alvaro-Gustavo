@@ -6,6 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.edu.escola.BiblioTec.model.Categoria;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 @Controller
 @RequestMapping("/categorias")
 public class CategoriaController {
@@ -24,4 +28,16 @@ public class CategoriaController {
         // Nome do template, sem a extensão .html.
         return "categorias/lista";
     }
+    @GetMapping("/nova")
+    public String nova(Model model) {
+        model.addAttribute("categoria", new Categoria());
+        return "categorias/form";
+    }
+
+    @PostMapping
+    public String salvar(@ModelAttribute Categoria categoria) {
+        categoriaService.salvar(categoria);
+        return "redirect:/categorias";
+    }
+
 }
