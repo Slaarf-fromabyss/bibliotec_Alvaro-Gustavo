@@ -11,7 +11,9 @@
 <h1>Categorias da biblioteca</h1>
 
 <p class="barra">
-    <a class="botao" th:href="@{/categorias/nova}">Nova categoria</a>
+    <a class="botao" th:href="@{/categorias/nova}">
+        Nova categoria
+    </a>
 </p>
 
 <table>
@@ -22,6 +24,7 @@
         <th scope="col">ID</th>
         <th scope="col">Nome</th>
         <th scope="col">Descrição</th>
+        <th scope="col">Ações</th>
     </tr>
     </thead>
 
@@ -30,6 +33,23 @@
         <td th:text="${categoria.id}">1</td>
         <td th:text="${categoria.nome}">Nome de exemplo</td>
         <td th:text="${categoria.descricao}">Descrição de exemplo</td>
+
+        <td>
+            <a class="botao"
+               th:href="@{/categorias/{id}/editar(id=${categoria.id})}">
+                Editar
+            </a>
+
+            <form th:action="@{/categorias/{id}/excluir(id=${categoria.id})}"
+                  method="post"
+                  style="display: inline;"
+                  onsubmit="return confirm('Tem certeza de que deseja excluir esta categoria?');">
+
+                <button type="submit" class="botao botao-secundario">
+                    Excluir
+                </button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
