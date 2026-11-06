@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 @RequestMapping("/categorias")
@@ -40,7 +42,13 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public String salvar(@ModelAttribute Categoria categoria) {
+    public String salvar(@Valid @ModelAttribute("categoria") Categoria categoria,
+                         BindingResult resultado) {
+
+        if (resultado.hasErrors()) {
+            return "categorias/form";
+        }
+
         categoriaService.salvar(categoria);
         return "redirect:/categorias";
     }

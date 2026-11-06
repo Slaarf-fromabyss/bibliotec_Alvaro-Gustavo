@@ -50,4 +50,15 @@ td.acoes .botao { margin-right: .3rem; }
     color: var(--verde);
     background: #dcebd2;
     border-left: 6px solid var(--verde-claro);
+
+    .erro {
+        margin: .3rem 0 0;
+        color: #b3402a;
+        font-size: .9rem;
+    }
+
+    .formulario input.campo-erro {
+        border-color: #b3402a;
+        background: #fdf1ef;
+    }
 }
