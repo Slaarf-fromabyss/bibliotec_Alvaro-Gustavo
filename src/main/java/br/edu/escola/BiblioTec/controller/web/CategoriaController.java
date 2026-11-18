@@ -1,14 +1,14 @@
+
 package br.edu.escola.BiblioTec.controller.web;
 
 import br.edu.escola.BiblioTec.model.Categoria;
 import br.edu.escola.BiblioTec.service.CategoriaService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 
@@ -42,20 +42,44 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public String salvar(@Valid @ModelAttribute("categoria") Categoria categoria,
-                         BindingResult resultado) {
+    public String salvar(
+            @Valid @ModelAttribute("categoria") Categoria categoria,
+            BindingResult resultado,
+            Model model) {
 
         if (resultado.hasErrors()) {
             return "categorias/form";
         }
 
-        categoriaService.salvar(categoria);
-        return "redirect:/categorias";
+        try {
+            categoriaService.salvar(categoria);
+            return "redirect:/categorias";
+
+        } catch (IllegalArgumentException e) {
+            resultado.rejectValue("nome", "categoria.duplicada", e.getMessage());
+            return "categorias/form";
+        }
     }
 
     @PostMapping("/{id}/excluir")
-    public String excluir(@PathVariable Long id) {
-        categoriaService.excluir(id);
+    public String excluir(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            categoriaService.excluir(id);
+
+            redirectAttributes.addFlashAttribute(
+                    "mensagem", "Categoria excluída com sucesso!"
+            );
+
+        } catch (IllegalArgumentException e) {
+
+            redirectAttributes.addFlashAttribute(
+                    "erro", e.getMessage()
+            );
+        }
+
         return "redirect:/categorias";
     }
 }

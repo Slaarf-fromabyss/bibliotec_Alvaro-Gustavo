@@ -1,4 +1,43 @@
-.barra { width: min(920px, 92%); margin: 0 auto 1rem; }
+
+/* =================================
+   CONFIGURAÇÕES GERAIS
+================================= */
+
+:root {
+    --papel: #fffaf0;
+    --papel-escuro: #e8dcc5;
+    --verde: #315c43;
+    --verde-claro: #527d5e;
+    --madeira: #6b4423;
+    --texto: #30271f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 25px 0;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--texto);
+    background: var(--papel);
+}
+
+h1 {
+    width: min(920px, 92%);
+    margin: 0 auto 25px;
+    color: var(--verde);
+}
+
+/* =================================
+   BARRA E BOTÕES
+================================= */
+
+.barra {
+    width: min(920px, 92%);
+    margin: 0 auto 1.5rem;
+}
 
 .botao {
     display: inline-block;
@@ -7,11 +46,76 @@
     color: var(--papel);
     background: var(--verde);
     border: 2px solid var(--madeira);
+    border-radius: 4px;
     text-decoration: none;
     cursor: pointer;
+    transition: background .2s;
 }
-.botao:hover { background: var(--verde-claro); }
-.botao-secundario { color: var(--verde); background: var(--papel-escuro); }
+
+.botao:hover {
+    background: var(--verde-claro);
+}
+
+.botao-secundario {
+    color: var(--verde);
+    background: var(--papel-escuro);
+}
+
+.botao-secundario:hover {
+    color: white;
+    background: #8b2e2e;
+}
+
+/* =================================
+   TABELA DE CATEGORIAS
+================================= */
+
+table {
+    width: min(920px, 92%);
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: #fff;
+    border: 2px solid var(--madeira);
+}
+
+caption {
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--verde);
+}
+
+thead {
+    color: var(--papel);
+    background: var(--verde);
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #d5c5aa;
+}
+
+tbody tr:nth-child(even) {
+    background: #f2eadb;
+}
+
+tbody tr:hover {
+    background: #e4eedf;
+}
+
+td form {
+    display: inline;
+}
+
+td .botao {
+    margin: 2px;
+}
+
+/* =================================
+   FORMULÁRIO
+================================= */
 
 .formulario {
     width: min(520px, 92%);
@@ -19,29 +123,58 @@
     padding: 1.5rem;
     background: #fffaf0;
     border: 3px solid var(--madeira);
-    box-shadow: 6px 6px 0 rgba(107,68,35,.25);
+    border-radius: 5px;
+    box-shadow: 6px 6px 0 rgba(107, 68, 35, .25);
 }
+
 .formulario label {
     display: block;
     margin: .8rem 0 .3rem;
     font-weight: bold;
     color: var(--verde);
 }
-.formulario input[type=text] {
+
+.formulario input,
+.formulario textarea,
+.formulario select {
     width: 100%;
     padding: .55rem;
     font: inherit;
     border: 2px solid var(--madeira);
+    border-radius: 3px;
     background: #fff;
 }
-div.acoes { display: flex; gap: .6rem; margin-top: 1.2rem; }
 
-.botao-pequeno { padding: .25rem .7rem; font-size: .85rem; }
-.botao-perigo { background: #8b2e2e; border-color: #5c1c1c; }
-.botao-perigo:hover { background: #a63a3a; }
+.formulario input:focus,
+.formulario textarea:focus,
+.formulario select:focus {
+    outline: 2px solid var(--verde-claro);
+}
 
-td.acoes form { display: inline; }
-td.acoes .botao { margin-right: .3rem; }
+div.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: 1.2rem;
+}
+
+.botao-pequeno {
+    padding: .25rem .7rem;
+    font-size: .85rem;
+}
+
+.botao-perigo {
+    background: #8b2e2e;
+    border-color: #5c1c1c;
+}
+
+.botao-perigo:hover {
+    background: #a63a3a;
+}
+
+/* =================================
+   MENSAGENS E ERROS
+================================= */
 
 .mensagem {
     width: min(920px, 92%);
@@ -50,15 +183,40 @@ td.acoes .botao { margin-right: .3rem; }
     color: var(--verde);
     background: #dcebd2;
     border-left: 6px solid var(--verde-claro);
+}
 
-    .erro {
-        margin: .3rem 0 0;
-        color: #b3402a;
-        font-size: .9rem;
+.erro {
+    margin: .3rem 0 0;
+    color: #b3402a;
+    font-size: .9rem;
+}
+
+.formulario input.campo-erro,
+.formulario textarea.campo-erro {
+    border-color: #b3402a;
+    background: #fdf1ef;
+}
+
+/* =================================
+   TELAS PEQUENAS
+================================= */
+
+@media (max-width: 600px) {
+    table {
+        font-size: .85rem;
     }
 
-    .formulario input.campo-erro {
-        border-color: #b3402a;
-        background: #fdf1ef;
+    th,
+    td {
+        padding: 7px;
+    }
+
+    .botao {
+        padding: .4rem .6rem;
+        font-size: .85rem;
+    }
+
+    .formulario {
+        padding: 1rem;
     }
 }
